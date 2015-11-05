@@ -9,7 +9,7 @@ buildscript {
 }
 
 allprojects {
-    group = 'com.soundcloud.android'
+    group = 'com.github.Hiroshiba'
     version = project.VERSION
 
     repositories {
