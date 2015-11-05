@@ -60,6 +60,9 @@ public class CropImageActivity extends MonitoredActivity {
     private int maxY;
     private int exifRotation;
 
+    private int inWidth;
+    private int inHeight;
+
     private Uri sourceUri;
     private Uri saveUri;
 
@@ -225,13 +228,13 @@ public class CropImageActivity extends MonitoredActivity {
             }
 
             HighlightView hv = new HighlightView(imageView);
-            final int width = rotateBitmap.getWidth();
-            final int height = rotateBitmap.getHeight();
+            inWidth = rotateBitmap.getWidth();
+            inHeight = rotateBitmap.getHeight();
 
-            Rect imageRect = new Rect(0, 0, width, height);
+            Rect imageRect = new Rect(0, 0, inWidth, inHeight);
 
             // Make the default size about 4/5 of the width or height
-            int cropWidth = Math.min(width, height) * 4 / 5;
+            int cropWidth = Math.min(inWidth, inHeight) * 4 / 5;
             @SuppressWarnings("SuspiciousNameCombination")
             int cropHeight = cropWidth;
 
@@ -243,8 +246,8 @@ public class CropImageActivity extends MonitoredActivity {
                 }
             }
 
-            int x = (width - cropWidth) / 2;
-            int y = (height - cropHeight) / 2;
+            int x = (inWidth - cropWidth) / 2;
+            int y = (inHeight - cropHeight) / 2;
 
             RectF cropRect = new RectF(x, y, x + cropWidth, y + cropHeight);
             hv.setup(imageView.getUnrotatedMatrix(), imageRect, cropRect, aspectX != 0 && aspectY != 0);
