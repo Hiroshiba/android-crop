@@ -46,6 +46,9 @@ public class CropImageActivity extends MonitoredActivity {
 
     private static final int SIZE_DEFAULT = 2048;
     private static final int SIZE_LIMIT = 4096;
+    public static final String EXTRA_RECT = "rect";
+    public static final String EXTRA_WIDTH = "width";
+    public static final String EXTRA_HEIGHT = "height";
 
     private final Handler handler = new Handler();
 
@@ -427,7 +430,14 @@ public class CropImageActivity extends MonitoredActivity {
     }
 
     private void setResultUri(Uri uri) {
-        setResult(RESULT_OK, new Intent().putExtra(MediaStore.EXTRA_OUTPUT, uri));
+        setResult(
+                RESULT_OK,
+                new Intent()
+                        .putExtra(MediaStore.EXTRA_OUTPUT, uri)
+                        .putExtra(EXTRA_RECT, cropView.getScaledCropRect(sampleSize))
+                        .putExtra(EXTRA_WIDTH, inWidth)
+                        .putExtra(EXTRA_HEIGHT, inHeight)
+        );
     }
 
     private void setResultException(Throwable throwable) {
